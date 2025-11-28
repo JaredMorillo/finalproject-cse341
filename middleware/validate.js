@@ -4,7 +4,7 @@ const saveStories = (req, res, next) => {
   const validationRules = {
     title: 'required|string',
     genre: 'required|string',
-    description: 'required|string|max:15',
+    description: 'required|string',
   };
   
    validator(req.body, validationRules, {}, (err, status) => {
