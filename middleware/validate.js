@@ -6,12 +6,23 @@ const saveStories = (req, res, next) => {
     genre: 'required|string',
     description: 'required|string|max:15',
   };
+  
    validator(req.body, validationRules, {}, (err, status) => {
     if (!status) {
       return res.status(412).json({
         success: false,
         message: 'Validation failed',
         data: err
+      });
+    }
+
+    const description = req.body.description || '';
+    const wordCount = description.trim().split(/\s+/).length;
+
+    if (wordCount > 15) {
+      return res.status(412).json({
+        success: false,
+        message: 'Description cannot exceed 15 words',
       });
     }
     
