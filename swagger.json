@@ -5,10 +5,10 @@
     "description": "Final Project for CSE341",
     "version": "1.0.0"
   },
-  "host": "localhost:5050",
+  "host": "finalproject-cse341-157q.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/": {
