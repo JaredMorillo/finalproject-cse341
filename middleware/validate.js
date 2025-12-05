@@ -52,4 +52,42 @@ const saveMasters = (req, res, next) => {
   });
 };
 
-module.exports = { saveMasters, saveStories };
+const saveItems = (req, res, next) => {
+  const validationRules = {
+    item: 'required|string',
+    class: 'required|string',
+    advantage: 'required|string',
+  };
+  
+   validator(req.body, validationRules, {}, (err, status) => {
+    if (!status) {
+      return res.status(412).json({
+        success: false,
+        message: 'Validation failed',
+        data: err
+      });
+    }
+
+    const allowedClasses = ['Rogue', 'Knight', 'Wizard', 'Ranger', 'Paladin'];
+    if (!allowedClasses.includes(req.body.class)) {
+      return res.status(412).json({
+        success: false,
+        message: `Class must be one of: ${allowedClasses.join(', ')}`,
+      });
+    }
+
+    const advantage = req.body.advantage || '';
+    const wordCount = advantage.trim().split(/\s+/).length;
+
+    if (wordCount > 10) {
+      return res.status(412).json({
+        success: false,
+        message: 'Description cannot exceed 10 words',
+      });
+    }
+    
+    next();
+  });
+};
+
+module.exports = { saveMasters, saveStories, saveItems };
