@@ -14,6 +14,10 @@ router.use('/masters', require('./masters'));
 
 router.use('/stories', require('./stories'));
 
+router.use('/items', require('./items'));
+
+router.use('/characters', require('./characters'));
+
 router.get('/login', passport.authenticate('github'), (req, res) => {
     res.redirect("/");
 });

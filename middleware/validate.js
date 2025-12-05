@@ -90,4 +90,40 @@ const saveItems = (req, res, next) => {
   });
 };
 
-module.exports = { saveMasters, saveStories, saveItems };
+const saveCharacters = (req, res, next) => {
+  const validationRules = {
+    name: 'required|string',
+    class: 'required|string',
+    race: 'required|string',
+  };
+  
+   validator(req.body, validationRules, {}, (err, status) => {
+    if (!status) {
+      return res.status(412).json({
+        success: false,
+        message: 'Validation failed',
+        data: err
+      });
+    }
+
+    const allowedClasses = ['Rogue', 'Knight', 'Wizard', 'Ranger', 'Paladin'];
+    if (!allowedClasses.includes(req.body.class)) {
+      return res.status(412).json({
+        success: false,
+        message: `Class must be one of: ${allowedClasses.join(', ')}`,
+      });
+    }
+
+    const allowedRaces = ['Human', 'Elf', 'Dwarf', 'Orc', 'Hobbit'];
+    if (!allowedRaces.includes(req.body.race)) {
+      return res.status(412).json({
+        success: false,
+        message: `Race must be one of: ${allowedRaces.join(', ')}`,
+      });
+    }
+
+    next();
+  });
+};
+
+module.exports = { saveMasters, saveStories, saveItems, saveCharacters };
