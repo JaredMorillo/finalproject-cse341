@@ -1,0 +1,33 @@
+//Masters Routes
+### Get all contacts
+GET https://finalproject-cse341-157q.onrender.com/masters
+
+
+### Get contact by id
+GET https://finalproject-cse341-157q.onrender.com/masters/6929b1cff83dfb0e00ba8212
+
+
+### Create contact
+POST  https://finalproject-cse341-157q.onrender.com/masters
+Content-Type: application/json
+
+{
+"name": "Donald",
+"username": "The Creeper",
+"level": "15",
+"email": "doncre@dungeon.org"
+}
+
+###Update a contact
+PUT https://finalproject-cse341-157q.onrender.com/masters/6929b1cff83dfb0e00ba8212
+Content-Type: application/json
+
+{
+"name": "Kevin",
+"username": "The Master",
+"level": "10",
+"email": "kevma@dungeon.org"
+}
+
+###Delete a contact
+DELETE https://finalproject-cse341-157q.onrender.com/masters/6929b1cff83dfb0e00ba8212
